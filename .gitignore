@@ -1,6 +1,9 @@
 # Ignore dependency directories
 /vendor/
 
+# Ignore
+.hintrc
+
 # Ignore Composer files
 composer.json
 composer.lock
