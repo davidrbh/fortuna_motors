@@ -15308,8 +15308,8 @@ fieldset:disabled .btn {
   left: 0;
   right: 0;
   padding: 40px;
-  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
