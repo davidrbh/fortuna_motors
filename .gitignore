@@ -1,0 +1,6 @@
+# Ignore dependency directories
+/vendor/
+
+# Ignore Composer files
+composer.json
+composer.lock
