@@ -11,8 +11,7 @@
     <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/main.css">
     <!-- <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/main.min.css"> -->
     <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <title><?= $data['page_tag']; ?></title>
 </head>
 
@@ -63,8 +62,7 @@
                     <button class="btn btn-primary btn-block"><i class="bi bi-unlock me-2 fs-5"></i>RESET</button>
                 </div>
                 <div class="mb-3 mt-3">
-                    <p class="semibold-text mb-0"><a href="#" data-toggle="flip-left"><i
-                                class="bi bi-chevron-left me-1"></i>
+                    <p class="semibold-text mb-0"><a href="#" data-toggle="flip-left"><i class="bi bi-chevron-left me-1"></i>
                             Back to Login</a></p>
                 </div>
             </form>
@@ -78,8 +76,7 @@
                     <button class="btn btn-primary btn-block"><i class="bi bi-unlock me-2 fs-5"></i>CONTINUE</button>
                 </div>
                 <div class="mb-3 mt-3">
-                    <p class="semibold-text mb-0"><a href="#" data-toggle="flip-right"><i
-                                class="bi bi-chevron-left me-1"></i>
+                    <p class="semibold-text mb-0"><a href="#" data-toggle="flip-right"><i class="bi bi-chevron-left me-1"></i>
                             Back to Login</a></p>
                 </div>
             </form>
