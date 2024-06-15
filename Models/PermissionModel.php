@@ -36,7 +36,9 @@ class PermissionModel extends Mysql
 
 	public function selectModules()
 	{
-		$sql = "SELECT * FROM `modules` WHERE status != 0";
+		$sql = "SELECT * 
+				FROM `modules` 
+				WHERE status != 0";
 		return $this->select_all($sql);
 	}
 
@@ -51,7 +53,9 @@ class PermissionModel extends Mysql
 	public function selectPermissions(int $id_rol)
 	{
 		$this->id_permission = $id_rol;
-		$sql = "SELECT * FROM `permissions` WHERE rol_id = $this->id_permission";
+		$sql = "SELECT * 
+				FROM `permissions` 
+				WHERE rol_id = $this->id_permission";
 		return $this->select($sql);
 	}
 
@@ -65,7 +69,9 @@ class PermissionModel extends Mysql
 	public function deletePermissions(int $id_rol)
 	{
 		$this->intRolid = $id_rol;
-		$sql = "DELETE FROM Permissions WHERE rol_id = $this->intRolid";
+		$sql = "DELETE 
+				FROM Permissions 
+				WHERE rol_id = $this->intRolid";
 		return $this->delete($sql);
 	}
 
@@ -90,7 +96,9 @@ class PermissionModel extends Mysql
 	) {
 		$this->intRolid = $id_rol;
 		$this->intModuleid = $id_module;
-		$query_insert = "INSERT INTO permissions(rol_id,module_id, r, w, u, d) VALUES(?, ?, ?, ?, ?, ?)";
+		$query_insert = "INSERT 
+						INTO permissions(rol_id,module_id, r, w, u, d) 
+						VALUES(?, ?, ?, ?, ?, ?)";
 		$arrData = array($this->intRolid, $this->intModuleid, $r, $w, $u, $d);
 		return $this->insert($query_insert, $arrData);
 	}
@@ -112,7 +120,8 @@ class PermissionModel extends Mysql
                         p.u,
                         p.d
                 FROM permissions p
-                INNER JOIN modules m ON p.module_id = m.id_modules
+                INNER JOIN modules m 
+				ON p.module_id = m.id_modules
                 WHERE p.rol_id = $this->intRolid";
 
 		$request = $this->select_all($sql);
