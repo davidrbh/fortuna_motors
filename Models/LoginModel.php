@@ -31,7 +31,7 @@ class LoginModel extends Mysql
         $this->strUser = $user;
         $this->strPassword = $password;
         $sql = "SELECT id_user, status 
-                FROM user 
+                FROM users 
                 WHERE email_user = '$this->strUser' 
                 AND password = '$this->strPassword' 
                 AND status != 0";
