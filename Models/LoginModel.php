@@ -6,9 +6,9 @@
 class LoginModel extends Mysql
 {
     /** @var int|null User ID. */
-    private $intId_Usuario;
+    private $intId_User;
     /** @var string|null User email. */
-    private $strUsuario;
+    private $strUser;
     /** @var string|null User password. */
     private $strPassword;
     /** @var string|null User token. */
@@ -22,16 +22,16 @@ class LoginModel extends Mysql
     /**
      * Authenticates a user based on email and password.
      *
-     * @param string $usuario User's email
+     * @param string $user User's email
      * @param string $password User's password
      * @return array|null User data or null if authentication fails
      */
-    public function loginUser(string $usuario, string $password)
+    public function loginUser(string $user, string $password)
     {
-        $this->strUsuario = $usuario;
+        $this->strUser = $user;
         $this->strPassword = $password;
-        $sql = "SELECT id_usuario, status FROM usuario WHERE
-                email_user = '$this->strUsuario' AND
+        $sql = "SELECT id_user, status FROM user WHERE
+                email_user = '$this->strUser' AND
                 password = '$this->strPassword' AND
                 status != 0";
 
@@ -41,24 +41,24 @@ class LoginModel extends Mysql
     /**
      * Retrieves user data and role information for session.
      *
-     * @param int $iduser User ID
+     * @param int $idUser User ID
      * @return array|null User data with role details or null if not found
      */
-    public function sessionLogin(int $iduser)
+    public function sessionLogin(int $idUser)
     {
-        $this->intId_Usuario = $iduser;
-        $sql = "SELECT p.id_usuario,
+        $this->intId_User = $idUser;
+        $sql = "SELECT p.id_user,
                         p.cedula,
-                        p.nombres,
-                        p.apellidos,
-                        p.telefono,
+                        p.name,
+                        p.last_name,
+                        p.phone,
                         p.email_user,
                         r.id_rol,
-                        r.nombre_rol,
+                        r.name_rol,
                         p.status
-                FROM usuario p
-                INNER JOIN rol r ON p.rol_id = r.id_rol
-                WHERE p.id_usuario = $this->intId_Usuario";
+                FROM users p
+                INNER JOIN roles r ON p.rol_id = r.id_rol
+                WHERE p.id_user = $this->intId_User";
 
         $request = $this->select($sql);
         $_SESSION['userData'] = $request;
@@ -73,23 +73,23 @@ class LoginModel extends Mysql
      */
     public function getUserEmail(string $strEmail)
     {
-        $this->strUsuario = $strEmail;
-        $sql = "SELECT id_usuario, nombres, apellidos, status FROM usuario WHERE email_user = '$this->strUsuario' AND status = 1";
+        $this->strUser = $strEmail;
+        $sql = "SELECT id_user, name, last_name, status FROM users WHERE email_user = '$this->strUser' AND status = 1";
         return $this->select($sql);
     }
 
     /**
      * Sets a token for a user.
      *
-     * @param int $id_usuario User ID
+     * @param int $id_user User ID
      * @param string $token Token to set
      * @return bool True if token update is successful, false otherwise
      */
-    public function setTokenUser(int $id_usuario, string $token)
+    public function setTokenUser(int $id_user, string $token)
     {
-        $this->intId_Usuario = $id_usuario;
+        $this->intId_User = $id_user;
         $this->strToken = $token;
-        $sql = "UPDATE usuario SET token = ? WHERE id_usuario = $this->intId_Usuario";
+        $sql = "UPDATE users SET token = ? WHERE id_user = $this->intId_User";
         $arrData = array($this->strToken);
         return $this->update($sql, $arrData);
     }
@@ -101,11 +101,11 @@ class LoginModel extends Mysql
      * @param string $token Token for verification
      * @return array|null User ID or null if not found
      */
-    public function getUsuario(string $email, string $token)
+    public function getUser(string $email, string $token)
     {
-        $this->strUsuario = $email;
+        $this->strUser = $email;
         $this->strToken = $token;
-        $sql = "SELECT id_usuario FROM usuario WHERE email_user = '$this->strUsuario'
+        $sql = "SELECT id_user FROM users WHERE email_user = '$this->strUser'
                 AND token = '$this->strToken' AND status = 1";
 
         return $this->select($sql);
@@ -114,15 +114,15 @@ class LoginModel extends Mysql
     /**
      * Updates user password.
      *
-     * @param int $id_usuario User ID
+     * @param int $id_user User ID
      * @param string $password New password
      * @return bool True if password update is successful, false otherwise
      */
-    public function insertPassword(int $id_usuario, string $password)
+    public function insertPassword(int $id_user, string $password)
     {
-        $this->intId_Usuario = $id_usuario;
+        $this->intId_User = $id_user;
         $this->strPassword = $password;
-        $sql = "UPDATE usuario SET password = ?, token = ? WHERE id_usuario = $this->intId_Usuario";
+        $sql = "UPDATE users SET password = ?, token = ? WHERE id_user = $this->intId_User";
         $arrData = array($this->strPassword, "");
         return $this->update($sql, $arrData);
     }
